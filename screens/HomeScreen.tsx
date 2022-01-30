@@ -8,6 +8,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
   Alert,
+  Pressable,
 } from "react-native";
 
 import { Endpoint, Method } from "../Interfaces/Endpoint";
@@ -19,6 +20,7 @@ import Input from "../components/Input";
 import Colors from "../constants/Colors";
 
 import Get from "../API/Get";
+import DataObjectInput from "../components/DataObjectInput";
 
 const HomeScreen = () => {
   const [enteredValue, setEnteredValue] = useState("");
@@ -32,6 +34,7 @@ const HomeScreen = () => {
     Method: Method.GET,
   });
   const [endpoints, setEndpoints] = useState<Endpoint[]>([]);
+  const [isAddingDataObject, setIsAddingDataObject] = useState(false);
 
   // For testing requests - remove later
   const [requestData, setRequestData] = useState("");
@@ -102,6 +105,8 @@ const HomeScreen = () => {
     Keyboard.dismiss();
   };
 
+  const onAddDataObject = (dataObject: DataObject) => {};
+
   let confirmedOutput;
   if (confirmed) {
     confirmedOutput = (
@@ -126,6 +131,13 @@ const HomeScreen = () => {
       }}
     >
       <View style={styles.screen}>
+        <DataObjectInput
+          onAddDataObject={onAddDataObject}
+          visible={isAddingDataObject}
+          onCancel={() => {
+            setIsAddingDataObject(false);
+          }}
+        />
         <Text style={styles.title}>Enter a new Endpoint!</Text>
         <Card style={styles.card}>
           <Text style={styles.cardHeader}>
@@ -153,6 +165,14 @@ const HomeScreen = () => {
             value={APIKey}
             placeholder="API Key"
           />
+
+          <Pressable
+            style={{ ...styles.button, ...styles.dataObject }}
+            onPress={() => setIsAddingDataObject(true)}
+          >
+            <Text style={styles.dataObjectText}>Define Data Object</Text>
+          </Pressable>
+
           <View style={styles.buttonContainer}>
             <View style={styles.cancelButton}>
               <Button
@@ -161,20 +181,20 @@ const HomeScreen = () => {
                 onPress={resetInputHandler}
               />
             </View>
-            {/* <View style={styles.button}>
+            <View style={styles.button}>
               <Button
                 color={Colors.darkSecondary}
                 title="Add"
                 onPress={confirmInputHandler}
               />
-            </View> */}
-            <View style={styles.button}>
+            </View>
+            {/* <View style={styles.button}>
               <Button
                 color={Colors.darkSecondary}
                 title="Get Data"
                 onPress={getDataHandler}
               />
-            </View>
+            </View> */}
           </View>
         </Card>
         {confirmedOutput}
@@ -236,6 +256,19 @@ const styles = StyleSheet.create({
     paddingBottom: 60,
     flex: 1,
   },
+  dataObject: {
+    marginVertical: 15,
+    height: 45,
+    width: "80%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1,
+    borderRadius: 5
+  },
+  dataObjectText: {
+    fontSize: 20,
+    color: Colors.secondary,
+  }
 });
 
 export default HomeScreen;
