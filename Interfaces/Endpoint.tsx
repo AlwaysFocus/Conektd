@@ -8,8 +8,16 @@ export const enum Method {
     DELETE = 'DELETE'
 }
 
+// export const enum Method {
+//     GET,
+//     POST,
+//     PATCH,
+//     DELETE
+// }
+
 export interface Endpoint{
     Id: any,
+    Name: string,
     URI: string,
     APIKey: string,
     DataObject: DataObject

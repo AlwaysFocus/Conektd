@@ -9,7 +9,7 @@ export default {
 
 
     /** Theme 2 */ 
-    // primary: "#5E9ABF",
+    // primary: "#5E9ABF", 
     // secondary: "#2D6DA6",
     // background: "#F2F2F2",
     // darkPrimary: "#A64C38",
@@ -24,11 +24,11 @@ export default {
     // darkSecondary: "#B7D7D9"
     /** End Theme 3 */
     
-    // Theme 3 //
+    // Theme 4 //
     primary: "#11698C",
     secondary: "#66D9B8",
     background: "#0B1F26",
     darkPrimary: "#5BA691",
     darkSecondary: "#E8F29B"
-    // End Theme 3
+    // End Theme 4 //
 };
