@@ -1,11 +1,12 @@
+import { Endpoint } from "../Interfaces/Endpoint";
+
 interface Props {
-  URI: string;
-  APIKey?: string;
+  endpoint: Endpoint
 }
 
 const Get = async (props: Props) => {
   try {
-    const response = await fetch(props.URI, {
+    const response = await fetch(props.endpoint.URI, {
       method: "GET",
       headers: {
         Accept: "application/json",
